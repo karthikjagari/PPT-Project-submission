@@ -124,7 +124,7 @@ export function App() {
             rel="noopener noreferrer"
             className="flex-shrink-0 py-2.5 px-5 rounded-full bg-gradient-to-r from-[#FF6600] to-[#FF8533] text-white font-black text-xs flex items-center gap-1.5 shadow-md active:scale-95 cursor-pointer uppercase tracking-wider border border-[#FFCC00]/40"
           >
-            <span>🚀 JOIN AI BOOTCAMP</span>
+            <span>JOIN AI BOOTCAMP</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
         </div>

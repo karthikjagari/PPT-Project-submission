@@ -121,7 +121,7 @@ export function RewardPopup({ isOpen, onClose }: RewardPopupProps) {
                 onClick={onClose}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-[#FF6600] to-[#FF8533] hover:from-[#E65C00] hover:to-[#FF6600] text-white font-black text-xs sm:text-sm tracking-wider uppercase shadow-xl shadow-[#FF6600]/40 hover:shadow-2xl transition-all duration-300 active:scale-95 cursor-pointer border border-[#FFCC00]/40"
               >
-                <span>🚀 CLAIM YOUR COHORT SPOT</span>
+                <span>CLAIM YOUR COHORT SPOT</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>

@@ -11,7 +11,7 @@ export const PROJECT_SUBMISSION_URL =
 
 // 2. AI BOOTCAMP REGISTRATION URL (Used for all Join Bootcamp CTAs)
 export const BOOTCAMP_REGISTRATION_URL =
-  'https://docs.google.com/forms/d/1Kqo7MfwRRtQbMxfWVlEbIzRwE9fQpOwujl21Hmg4QY8/edit';
+  'https://docs.google.com/forms/d/17vhDbnctM0qnfktBP3NSIZMSF4bSERTHWuQUjSrmNJI/edit';
 
 // 3. PROJECT DEADLINE (Exact: Wednesday, 9 September 2026, 9:00 PM IST)
 export const SUBMISSION_DEADLINE_ISO = '2026-09-09T21:00:00+05:30';

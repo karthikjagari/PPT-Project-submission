@@ -189,7 +189,7 @@ export function HeroSection() {
             rel="noopener noreferrer"
             className="w-[calc(100%-40px)] max-w-[360px] sm:w-auto h-[54px] sm:h-[56px] sm:py-4 sm:px-8 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#FF6600] to-[#FF8533] hover:from-[#E65C00] hover:to-[#FF6600] text-white font-black text-sm sm:text-base tracking-wider uppercase shadow-xl shadow-[#FF6600]/30 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 border border-[#FFCC00]/40 cursor-pointer flex-shrink-0"
           >
-            <span>🚀 SUBMIT MY PROJECT →</span>
+            <span>SUBMIT MY PROJECT →</span>
           </a>
 
           {/* Secondary CTA: Join AI Bootcamp */}
@@ -200,7 +200,7 @@ export function HeroSection() {
             rel="noopener noreferrer"
             className="w-[calc(100%-40px)] max-w-[360px] sm:w-auto h-[52px] sm:h-[56px] sm:py-4 sm:px-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#10182C] hover:bg-[#1A2540] text-white font-bold text-xs sm:text-sm tracking-wide border border-[#10182C] shadow-lg shadow-[#10182C]/10 transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 cursor-pointer flex-shrink-0"
           >
-            <span>🔥 JOIN AI BOOTCAMP</span>
+            <span>JOIN AI BOOTCAMP</span>
             <ArrowRight className="w-4 h-4 text-[#FFCC00]" />
           </a>
         </div>

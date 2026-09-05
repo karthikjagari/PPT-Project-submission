@@ -64,7 +64,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FF6600] to-[#FF8533] hover:from-[#E65C00] hover:to-[#FF6600] text-white font-extrabold text-xs tracking-wider uppercase shadow-md shadow-[#FF6600]/25 hover:shadow-lg transition-all duration-300 active:scale-95 cursor-pointer border border-[#FFCC00]/40"
           >
-            <span>🚀 JOIN AI BOOTCAMP</span>
+            <span>JOIN AI BOOTCAMP</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
         </div>
@@ -104,7 +104,7 @@ export function Navbar() {
             onClick={() => setIsMobileMenuOpen(false)}
             className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-full bg-gradient-to-r from-[#FF6600] to-[#FF8533] text-white font-extrabold text-sm uppercase tracking-wider shadow-md border border-[#FFCC00]/40"
           >
-            <span>🚀 JOIN AI BOOTCAMP</span>
+            <span>JOIN AI BOOTCAMP</span>
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>

@@ -47,7 +47,7 @@ export const BootcampRegisterModal: React.FC<BootcampRegisterModalProps> = ({ is
         timestamp: new Date().toISOString()
       });
       localStorage.setItem('niat_bootcamp_leads', JSON.stringify(storedLeads));
-      console.log('🔥 [NIAT Weekend Bootcamp Lead Saved]', { name, mobile: cleanPhone, stream });
+      console.log('[NIAT Weekend Bootcamp Lead Saved]', { name, mobile: cleanPhone, stream });
     } catch (err) {
       console.warn('Could not cache lead:', err);
     }
@@ -91,7 +91,7 @@ export const BootcampRegisterModal: React.FC<BootcampRegisterModalProps> = ({ is
             </span>
 
             <h3 className="text-2xl font-black text-gray-900 mb-2 font-['Plus_Jakarta_Sans']">
-              🎉 Welcome to the Weekend AI Cohort!
+              Welcome to the Weekend AI Cohort!
             </h3>
 
             <p className="text-sm text-gray-600 max-w-sm mx-auto mb-6">
@@ -122,7 +122,7 @@ export const BootcampRegisterModal: React.FC<BootcampRegisterModalProps> = ({ is
             </div>
 
             <h3 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight font-['Plus_Jakarta_Sans'] mb-2">
-              Join Weekend AI Bootcamp 🔥
+              Join Weekend AI Bootcamp
             </h3>
 
             <p className="text-xs sm:text-sm text-gray-600 mb-6">

@@ -131,7 +131,7 @@ export const REWARDS_LIST = [
     id: 'ipad',
     title: 'Apple iPad Air / 10th Gen',
     category: 'Grand Winner Showcase',
-    badge: '🏆 Top Monthly Builder',
+    badge: 'Top Monthly Builder',
     description: 'The ultimate portable powerhouse for Class 12 notes, sketching diagrams, and building AI tools.',
     icon: 'Tablet',
     color: 'border-amber-300 bg-gradient-to-br from-amber-50 via-white to-amber-100/40 text-amber-950'
@@ -140,7 +140,7 @@ export const REWARDS_LIST = [
     id: 'smartwatch',
     title: 'Smartwatch (Apple / Galaxy / Amazfit)',
     category: 'Weekly MVP Award',
-    badge: '⏱️ Consistent Builder',
+    badge: 'Consistent Builder',
     description: 'Track your focus hours, pomodoro study sessions, and stay connected with a premium wearable.',
     icon: 'Watch',
     color: 'border-rose-300 bg-gradient-to-br from-rose-50 via-white to-rose-100/40 text-rose-950'
@@ -149,7 +149,7 @@ export const REWARDS_LIST = [
     id: 'headphones',
     title: 'Active Noise-Cancelling Headphones',
     category: 'Focus Gear',
-    badge: '🎧 Deep Work Gear',
+    badge: 'Deep Work Gear',
     description: 'Block out distractions and dive into uninterrupted study and coding sprints.',
     icon: 'Headphones',
     color: 'border-sky-300 bg-gradient-to-br from-sky-50 via-white to-sky-100/40 text-sky-950'
@@ -158,7 +158,7 @@ export const REWARDS_LIST = [
     id: 'smartphone',
     title: '5G Smartphone / Tech Peripherals',
     category: 'Innovation Star',
-    badge: '📱 High Impact Build',
+    badge: 'High Impact Build',
     description: 'Awarded for exceptional creativity in the "Build for India" post-workshop challenge.',
     icon: 'Smartphone',
     color: 'border-emerald-300 bg-gradient-to-br from-emerald-50 via-white to-emerald-100/40 text-emerald-950'
@@ -167,7 +167,7 @@ export const REWARDS_LIST = [
     id: 'certificates',
     title: 'Verified NIAT Excellence Certificates',
     category: 'Credentialing',
-    badge: '📜 College Portfolio',
+    badge: 'College Portfolio',
     description: 'Official digital credential verified by NIAT highlighting your AI proficiency for college applications.',
     icon: 'Award',
     color: 'border-purple-300 bg-gradient-to-br from-purple-50 via-white to-purple-100/40 text-purple-950'
@@ -176,7 +176,7 @@ export const REWARDS_LIST = [
     id: 'trophy',
     title: 'NIAT Young AI Innovator Trophy & Badges',
     category: 'Championship Recognition',
-    badge: '🌟 Hall of Fame',
+    badge: 'Hall of Fame',
     description: 'Physical memento awarded at national batch convocations recognizing standout innovators.',
     icon: 'Trophy',
     color: 'border-yellow-400 bg-gradient-to-br from-yellow-50 via-amber-50 to-yellow-100 text-yellow-950'

@@ -61,7 +61,7 @@ export function FinalCtaSection() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-3 px-8 py-4.5 rounded-full bg-gradient-to-r from-[#FF6600] to-[#FF8533] hover:from-[#E65C00] hover:to-[#FF6600] text-white font-black text-base tracking-wider uppercase shadow-xl shadow-[#FF6600]/30 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 active:scale-95 cursor-pointer border border-[#FFCC00]/40"
                 >
-                  <span>🚀 JOIN THE AI BOOTCAMP</span>
+                  <span>JOIN THE AI BOOTCAMP</span>
                   <ArrowRight className="w-5 h-5" />
                 </a>
 

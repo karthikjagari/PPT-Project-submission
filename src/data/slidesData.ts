@@ -241,7 +241,7 @@ export const SLIDES_DATA: SlideItem[] = [
     title: 'All The Best!',
     subtitle: 'You have the tools. You have the ideas. Now build something real.',
     accent: '#8B1E2D',
-    badge: 'BUILD ✦ COMPETE ✦ RISE',
+    badge: 'BUILD · COMPETE · RISE',
     content: {
       type: 'conclusion',
       data: {

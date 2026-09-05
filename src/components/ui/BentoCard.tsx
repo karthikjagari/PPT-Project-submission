@@ -114,7 +114,7 @@ export function BentoCard({
 
       {/* Subtle Outcrowd Technical Corner Crosshair on Hover */}
       <div className="pointer-events-none absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <span className="text-[9px] font-mono text-[#FFCC00] font-bold">✦</span>
+        <span className="text-[9px] font-mono text-[#FFCC00] font-bold">+</span>
       </div>
 
       {children}

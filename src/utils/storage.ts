@@ -60,7 +60,7 @@ export async function submitProject(data: SubmissionPayload): Promise<{ success:
 
   // Simulating delay and logging formatted payload
   await new Promise(resolve => setTimeout(resolve, 800));
-  console.log('🚀 [NIAT AI Submission Recorded]', submissionWithMeta);
+  console.log('[NIAT AI Submission Recorded]', submissionWithMeta);
 
   return {
     success: true,
