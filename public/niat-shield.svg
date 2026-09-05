@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" fill="none">
+  <!-- Outer Shield Shape -->
+  <path d="M100 8 L185 8 L185 140 C185 195 100 232 100 232 C100 232 15 195 15 140 L15 8 Z" fill="#8B1E2D" stroke="#6F1522" stroke-width="4"/>
+  
+  <!-- Right half white fill for the quartered heraldic look -->
+  <path d="M100 8 L185 8 L185 140 C185 195 100 232 L100 8 Z" fill="#FFFFFF"/>
+  
+  <!-- Cross dividers -->
+  <line x1="15" y1="120" x2="185" y2="120" stroke="#8B1E2D" stroke-width="8"/>
+  <line x1="100" y1="8" x2="100" y2="232" stroke="#8B1E2D" stroke-width="8"/>
+  
+  <!-- Top Left: N (White on Burgundy) -->
+  <text x="57" y="90" font-family="'Times New Roman', Georgia, serif" font-weight="900" font-size="68" fill="#FFFFFF" text-anchor="middle">N</text>
+  
+  <!-- Top Right: I (Burgundy on White) -->
+  <text x="143" y="90" font-family="'Times New Roman', Georgia, serif" font-weight="900" font-size="68" fill="#8B1E2D" text-anchor="middle">I</text>
+  
+  <!-- Bottom Left: A (White on Burgundy) -->
+  <text x="57" y="195" font-family="'Times New Roman', Georgia, serif" font-weight="900" font-size="68" fill="#FFFFFF" text-anchor="middle">A</text>
+  
+  <!-- Bottom Right: T (Burgundy on White) -->
+  <text x="143" y="195" font-family="'Times New Roman', Georgia, serif" font-weight="900" font-size="68" fill="#8B1E2D" text-anchor="middle">T</text>
+</svg>
