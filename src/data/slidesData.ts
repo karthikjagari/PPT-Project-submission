@@ -1,3 +1,5 @@
+import { getSubmissionDeadlineInfo } from '../config';
+
 export interface SlideItem {
   id: number;
   slideNumber: string;
@@ -228,7 +230,7 @@ export const SLIDES_DATA: SlideItem[] = [
           'Fill out the official project submission form with your presentation link.',
           'Submit your presentation URL for evaluation.'
         ],
-        deadlineText: 'Wednesday, 9th Sept 2026, 9:00 PM IST',
+        deadlineText: getSubmissionDeadlineInfo().displayOrdinal,
         note: 'Ensure your submission is complete and follows the project guidelines to qualify for evaluation.'
       }
     }

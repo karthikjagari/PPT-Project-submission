@@ -13,9 +13,14 @@ export const PROJECT_SUBMISSION_URL =
 export const BOOTCAMP_REGISTRATION_URL =
   'https://docs.google.com/forms/d/17vhDbnctM0qnfktBP3NSIZMSF4bSERTHWuQUjSrmNJI/edit';
 
-// 3. PROJECT DEADLINE (Exact: Wednesday, 9 September 2026, 9:00 PM IST)
-export const SUBMISSION_DEADLINE_ISO = '2026-09-09T21:00:00+05:30';
-export const SUBMISSION_DEADLINE_DISPLAY = 'Wednesday, 9 September 2026, 9:00 PM IST';
+// 3. PROJECT DEADLINE (Automated weekly Wednesday cycle, activates on Saturday)
+export { getSubmissionDeadlineInfo } from './utils/submissionDeadline';
+import { getSubmissionDeadlineInfo } from './utils/submissionDeadline';
+
+const initialCycle = getSubmissionDeadlineInfo();
+export const SUBMISSION_DEADLINE_ISO = initialCycle.targetISO;
+export const SUBMISSION_DEADLINE_DISPLAY = initialCycle.displayFull;
+export const SUBMISSION_DEADLINE_SHORT = initialCycle.displayShort;
 
 // 4. PROJECT SLIDES / GOOGLE PRESENTATION LINK
 export const PROJECT_PPT_URL =

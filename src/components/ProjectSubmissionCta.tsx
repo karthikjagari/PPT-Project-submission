@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
-import { PROJECT_SUBMISSION_URL, SUBMISSION_DEADLINE_ISO } from '../config';
+import { PROJECT_SUBMISSION_URL, getSubmissionDeadlineInfo } from '../config';
 import { MediaBox } from './ui/MediaBox';
 import { CinematicImage } from './ui/CinematicImage';
 import { BentoCard } from './ui/BentoCard';
 
 export function ProjectSubmissionCta() {
-  const [isExpired, setIsExpired] = useState(false);
+  const [cycleInfo, setCycleInfo] = useState(() => getSubmissionDeadlineInfo());
 
   useEffect(() => {
-    const target = new Date(SUBMISSION_DEADLINE_ISO).getTime();
-    const now = new Date().getTime();
-    if (target - now <= 0) {
-      setIsExpired(true);
-    }
+    const update = () => setCycleInfo(getSubmissionDeadlineInfo());
+    update();
+    const timer = setInterval(update, 30000);
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -26,9 +25,19 @@ export function ProjectSubmissionCta() {
             
             {/* Left Content (6 Cols) */}
             <div className="lg:col-span-6 space-y-5 text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-mono font-bold uppercase tracking-widest border border-emerald-200">
-                <span className="w-2 h-2 rounded-full bg-[#00FF00] animate-pulse" />
-                <span>OFFICIAL SUBMISSION PORTAL</span>
+              <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-widest border ${
+                cycleInfo.isActive
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  : 'bg-amber-50 text-amber-800 border-amber-200'
+              }`}>
+                <span className={`w-2 h-2 rounded-full ${
+                  cycleInfo.isActive ? 'bg-[#00FF00] animate-pulse' : 'bg-amber-500'
+                }`} />
+                <span>
+                  {cycleInfo.isActive
+                    ? 'OFFICIAL SUBMISSION PORTAL · ACTIVE'
+                    : 'OFFICIAL SUBMISSION PORTAL · PAUSED'}
+                </span>
               </div>
 
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#10182C] tracking-tight">
@@ -49,22 +58,31 @@ export function ProjectSubmissionCta() {
               </div>
 
               {/* Small Compact Deadline Badge */}
-              <div className="pt-3 flex items-center gap-3">
+              <div className="pt-3 flex flex-col sm:flex-row items-start sm:items-center gap-2.5">
                 <div className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border text-xs font-mono font-medium ${
-                  isExpired
+                  cycleInfo.isExpired
                     ? 'bg-rose-50 border-rose-200 text-rose-700 font-bold'
                     : 'bg-stone-100/80 border-stone-200 text-stone-700'
                 }`}>
-                  <Clock className="w-3.5 h-3.5 text-stone-500" />
-                  {isExpired ? (
-                    <span className="uppercase tracking-wider">SUBMISSIONS CLOSED</span>
+                  <Clock className={`w-3.5 h-3.5 ${cycleInfo.isExpired ? 'text-rose-500' : 'text-stone-500'}`} />
+                  {cycleInfo.isExpired ? (
+                    <div className="flex flex-wrap items-center gap-1.5 text-[11px] sm:text-xs">
+                      <span className="uppercase tracking-wider">SUBMISSIONS CLOSED</span>
+                      <span className="text-stone-500 font-normal">· OPENS {cycleInfo.nextCohortDisplay.toUpperCase()}</span>
+                    </div>
                   ) : (
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs">
                       <span className="font-bold text-stone-900">SUBMIT BY:</span>
-                      <span>WEDNESDAY, 9 SEPT 2026 · 9:00 PM IST</span>
+                      <span>{cycleInfo.displayShort}</span>
                     </div>
                   )}
                 </div>
+
+                {cycleInfo.isExpired && (
+                  <span className="text-[11px] font-mono text-stone-500">
+                    Next deadline: {cycleInfo.nextDeadlineDisplay}
+                  </span>
+                )}
               </div>
 
             </div>
