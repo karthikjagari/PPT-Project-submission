@@ -1,18 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, ArrowRight, Play, Pause, CheckCircle, Download, ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
-import { PROJECT_SUBMISSION_URL, PROJECT_PPT_DOWNLOAD_URL, PROJECT_PPT_URL } from '../config';
+import { Sparkles, ArrowRight, Play, Pause, CheckCircle, Download, ExternalLink, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
+import { PROJECT_SUBMISSION_URL, PROJECT_PPT_DOWNLOAD_URL, PROJECT_PPT_URL, getSubmissionDeadlineInfo } from '../config';
 
 const TOTAL_SLIDES = 9;
 const SLIDE_DURATION_MS = 4000;
 
 export function GoogleSlidesPlayer() {
+  const [viewMode, setViewMode] = useState<'player' | 'embed'>('player');
   const [currentSlide, setCurrentSlide] = useState(1);
   const [slideProgress, setSlideProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [cycleInfo, setCycleInfo] = useState(() => getSubmissionDeadlineInfo());
 
-  // Automatic Presentation Playback Loop with Pause/Resume
   useEffect(() => {
-    if (!isPlaying) return;
+    const update = () => setCycleInfo(getSubmissionDeadlineInfo());
+    update();
+    const timer = setInterval(update, 30000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Automatic Presentation Playback Loop for Slideshow mode
+  useEffect(() => {
+    if (!isPlaying || viewMode !== 'player') return;
 
     const intervalTime = 50;
     const step = (intervalTime / SLIDE_DURATION_MS) * 100;
@@ -28,7 +37,7 @@ export function GoogleSlidesPlayer() {
     }, intervalTime);
 
     return () => clearInterval(interval);
-  }, [isPlaying]);
+  }, [isPlaying, viewMode]);
 
   const togglePlay = () => {
     setIsPlaying((prev) => !prev);
@@ -71,40 +80,66 @@ export function GoogleSlidesPlayer() {
         {/* Premium Dark Visual Box Container */}
         <div className="relative mx-auto rounded-3xl p-3 sm:p-4 bg-gradient-to-b from-white/10 to-white/5 border border-white/15 shadow-2xl backdrop-blur-xl">
           
-          {/* Top Bar with Play/Pause and Open in Google Slides */}
+          {/* Top Bar with Live Mode Toggle and Open in Google Slides */}
           <div className="flex flex-wrap items-center justify-between px-3 py-2 mb-3 text-xs font-mono border-b border-white/10 gap-2">
-            {/* Left: Play/Pause Toggle & Live Status */}
+            {/* Left: View Mode Toggle & Live Status */}
             <div className="flex items-center gap-2 sm:gap-3">
-              <button
-                type="button"
-                onClick={togglePlay}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-[#FFCC00]/60 transition-colors text-xs font-mono font-bold cursor-pointer"
-                title={isPlaying ? 'Pause automatic slide progression' : 'Resume automatic slide progression'}
-                aria-label={isPlaying ? 'Pause slides' : 'Play slides'}
-              >
-                {isPlaying ? (
-                  <>
-                    <Pause className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                    <span>PAUSE</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-3.5 h-3.5 text-[#00FF00] fill-[#00FF00]" />
-                    <span>PLAY</span>
-                  </>
-                )}
-              </button>
-
-              <div className="flex items-center gap-1.5 text-stone-300 text-xs font-mono">
-                <span
-                  className={`w-2 h-2 rounded-full ${
-                    isPlaying ? 'bg-[#00FF00] animate-pulse' : 'bg-amber-400'
+              {/* Dual Mode Switch */}
+              <div className="inline-flex items-center p-0.5 rounded-full bg-white/10 border border-white/15">
+                <button
+                  type="button"
+                  onClick={() => setViewMode('embed')}
+                  className={`px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold transition-all cursor-pointer ${
+                    viewMode === 'embed'
+                      ? 'bg-[#FF6600] text-white shadow-md'
+                      : 'text-stone-300 hover:text-white'
                   }`}
-                />
-                <span className="hidden min-[480px]:inline font-semibold uppercase tracking-wider text-[11px]">
-                  {isPlaying ? 'AUTOPLAY ON' : 'PAUSED'}
-                </span>
+                  title="Direct live Google Slides presentation"
+                >
+                  LIVE SLIDES
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setViewMode('player')}
+                  className={`px-3 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold transition-all cursor-pointer ${
+                    viewMode === 'player'
+                      ? 'bg-[#FF6600] text-white shadow-md'
+                      : 'text-stone-300 hover:text-white'
+                  }`}
+                  title="Interactive slideshow player"
+                >
+                  SLIDESHOW
+                </button>
               </div>
+
+              {viewMode === 'player' ? (
+                <button
+                  type="button"
+                  onClick={togglePlay}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-[#FFCC00]/60 transition-colors text-xs font-mono font-bold cursor-pointer"
+                  title={isPlaying ? 'Pause automatic slide progression' : 'Resume automatic slide progression'}
+                  aria-label={isPlaying ? 'Pause slides' : 'Play slides'}
+                >
+                  {isPlaying ? (
+                    <>
+                      <Pause className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                      <span>PAUSE</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-3.5 h-3.5 text-[#00FF00] fill-[#00FF00]" />
+                      <span>PLAY</span>
+                    </>
+                  )}
+                </button>
+              ) : (
+                <div className="flex items-center gap-1.5 text-stone-300 text-xs font-mono">
+                  <span className="w-2 h-2 rounded-full bg-[#00FF00] animate-pulse" />
+                  <span className="hidden min-[480px]:inline font-semibold uppercase tracking-wider text-[11px] text-[#00FF00]">
+                    LIVE CLOUD SYNCED
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Right: Open in Google Slides + Slide Counter */}
@@ -121,69 +156,113 @@ export function GoogleSlidesPlayer() {
                 <span className="min-[380px]:hidden">GOOGLE SLIDES</span>
               </a>
 
-              {/* Current / Total Counter: 01 / 09 */}
-              <div className="px-3 py-1.5 rounded-full bg-white/10 text-[#FFCC00] font-black tracking-widest text-xs border border-[#FFCC00]/30">
-                {String(currentSlide).padStart(2, '0')} / {String(TOTAL_SLIDES).padStart(2, '0')}
-              </div>
+              {/* Counter (in Slideshow mode) */}
+              {viewMode === 'player' && (
+                <div className="px-3 py-1 rounded-full bg-white/10 text-[#FFCC00] font-black tracking-widest text-xs border border-[#FFCC00]/30">
+                  {String(currentSlide).padStart(2, '0')} / {String(TOTAL_SLIDES).padStart(2, '0')}
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Smooth Progress Indicator Bar */}
-          <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-3">
-            <div
-              className={`h-full transition-all duration-75 ease-linear rounded-full ${
-                isPlaying
-                  ? 'bg-gradient-to-r from-[#FF6600] via-[#FFCC00] to-[#FFCC00]'
-                  : 'bg-amber-400'
-              }`}
-              style={{ width: `${slideProgress}%` }}
-            />
-          </div>
+          {/* Smooth Progress Indicator Bar (in Slideshow mode) */}
+          {viewMode === 'player' && (
+            <div className="w-full h-1 bg-white/10 rounded-full overflow-hidden mb-3">
+              <div
+                className={`h-full transition-all duration-75 ease-linear rounded-full ${
+                  isPlaying
+                    ? 'bg-gradient-to-r from-[#FF6600] via-[#FFCC00] to-[#FFCC00]'
+                    : 'bg-amber-400'
+                }`}
+                style={{ width: `${slideProgress}%` }}
+              />
+            </div>
+          )}
 
-          {/* Slide Media Stage with Cinematic Crossfade & Navigation Controls */}
-          <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-black/60 border border-white/10 shadow-inner group">
-            {[...Array(TOTAL_SLIDES)].map((_, idx) => {
-              const slideNum = idx + 1;
-              const isActive = slideNum === currentSlide;
-              return (
-                <div
-                  key={slideNum}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                    isActive ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-[1.02]'
-                  }`}
+          {/* Slide Media Stage: Live Google Slides Embed OR Interactive Crossfade Stage */}
+          <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-inner group">
+            {viewMode === 'embed' ? (
+              /* ── LIVE GOOGLE SLIDES PRESENTATION EMBED ── */
+              <iframe
+                src="https://docs.google.com/presentation/d/1iYbLhSILDeJvySsy0YPWT2ZiEYrOh8UUmIs_kmDWVrs/embed?start=true&loop=true&delayms=4000"
+                className="w-full h-full border-0 rounded-2xl"
+                allowFullScreen
+                title="Live Google Slides Project Brief"
+              />
+            ) : (
+              /* ── HIGH-RES INTERACTIVE SLIDESHOW PLAYER ── */
+              <>
+                {[...Array(TOTAL_SLIDES)].map((_, idx) => {
+                  const slideNum = idx + 1;
+                  const isActive = slideNum === currentSlide;
+                  return (
+                    <div
+                      key={slideNum}
+                      className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                        isActive ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-[1.02]'
+                      }`}
+                    >
+                      <img
+                        src={`/assets/slides/slide-${slideNum}.png`}
+                        alt={`Project Challenge Brief Slide ${slideNum}`}
+                        className="w-full h-full object-contain"
+                      />
+
+                      {/* Dynamic Weekly Auto-Updating Deadline Overlay for Slide 8 */}
+                      {slideNum === 8 && (
+                        <div
+                          style={{
+                            position: 'absolute',
+                            left: '49.5%',
+                            top: '52.8%',
+                            width: '41.5%',
+                            height: '7.2%',
+                            background: '#FFF8D6',
+                            borderRadius: '8px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            fontWeight: 700,
+                            color: '#10182C',
+                            paddingLeft: '16px',
+                          }}
+                          className="text-[10px] min-[380px]:text-xs sm:text-sm md:text-base lg:text-[19px] xl:text-[21px] select-none pointer-events-none"
+                        >
+                          <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#8B1E2D] flex-shrink-0" />
+                          <span className="tracking-tight whitespace-nowrap">
+                            {cycleInfo.displaySlideDeadline}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+
+                {/* Manual Slide Navigation Arrows */}
+                <button
+                  type="button"
+                  onClick={handlePrevSlide}
+                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/90 text-white/90 hover:text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm active:scale-95 shadow-md"
+                  aria-label="Previous slide"
+                  title="Previous slide"
                 >
-                  <img
-                    src={`/assets/slides/slide-${slideNum}.png`}
-                    alt={`Project Challenge Brief Slide ${slideNum}`}
-                    className="w-full h-full object-contain"
-                  />
-                </div>
-              );
-            })}
+                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
 
-            {/* Manual Slide Navigation Arrows */}
-            <button
-              type="button"
-              onClick={handlePrevSlide}
-              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/90 text-white/90 hover:text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm active:scale-95 shadow-md"
-              aria-label="Previous slide"
-              title="Previous slide"
-            >
-              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
+                <button
+                  type="button"
+                  onClick={handleNextSlide}
+                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/90 text-white/90 hover:text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm active:scale-95 shadow-md"
+                  aria-label="Next slide"
+                  title="Next slide"
+                >
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
 
-            <button
-              type="button"
-              onClick={handleNextSlide}
-              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/60 hover:bg-black/90 text-white/90 hover:text-white border border-white/20 flex items-center justify-center transition-all cursor-pointer backdrop-blur-sm active:scale-95 shadow-md"
-              aria-label="Next slide"
-              title="Next slide"
-            >
-              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-
-            {/* Subtle Corner Vignette & Ambient Glow */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#10182C]/60 via-transparent to-transparent z-20" />
+                {/* Subtle Corner Vignette & Ambient Glow */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#10182C]/60 via-transparent to-transparent z-20" />
+              </>
+            )}
           </div>
 
           {/* Bottom Call to Action inside Player */}

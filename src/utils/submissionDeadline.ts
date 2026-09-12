@@ -21,6 +21,7 @@ export interface SubmissionDeadlineInfo {
   displayFull: string;
   displayShort: string;
   displayOrdinal: string;
+  displaySlideDeadline: string;
   dateOnly: string;
   targetDate: Date;
   isActive: boolean;
@@ -118,6 +119,7 @@ export function getSubmissionDeadlineInfo(currentDate: Date = new Date()): Submi
   const displayFull = `Wednesday, ${wedDay} ${monthFull} ${wedYear}, 9:00 PM IST`;
   const displayShort = `WEDNESDAY, ${wedDay}${ordinal.toUpperCase()} ${monthShort.toUpperCase()} ${wedYear} · 9:00 PM IST`;
   const displayOrdinal = `Wednesday, ${wedDay}${ordinal} ${monthShort} ${wedYear}, 9:00 PM IST`;
+  const displaySlideDeadline = `Wednesday, ${wedDay}${ordinal} ${monthShort} ${wedYear}, 9:00 PM`;
   const dateOnly = `${wedDay}${ordinal} ${monthFull} ${wedYear}`;
 
   const pad = (n: number) => String(n).padStart(2, '0');
@@ -145,6 +147,7 @@ export function getSubmissionDeadlineInfo(currentDate: Date = new Date()): Submi
     displayFull,
     displayShort,
     displayOrdinal,
+    displaySlideDeadline,
     dateOnly,
     targetDate,
     isActive,
