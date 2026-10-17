@@ -11,7 +11,7 @@ export const PROJECT_SUBMISSION_URL =
 
 // 2. AI BOOTCAMP REGISTRATION URL (Used for all Join Bootcamp CTAs)
 export const BOOTCAMP_REGISTRATION_URL =
-  'https://docs.google.com/forms/d/17vhDbnctM0qnfktBP3NSIZMSF4bSERTHWuQUjSrmNJI/edit';
+  'https://niat-ai-bootcamp.netlify.app/?utm_medium=website&utm_source=offline_ai_bootcamp&utm_campaign=assl';
 
 // 3. PROJECT DEADLINE (Automated weekly Wednesday cycle, activates on Saturday)
 export { getSubmissionDeadlineInfo } from './utils/submissionDeadline';
